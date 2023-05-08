@@ -1,3 +1,12 @@
+class Node {
+  int data;
+  Node? next;
+  Node(this.data) {
+    
+    next = null;
+  }
+}
+
 class Queue {
   Node? top;
 
@@ -41,13 +50,6 @@ class Queue {
   }
 }
 
-class Node {
-  int data;
-  Node? next;
-  Node(this.data) {
-    next = null;
-  }
-}
 
 void main() {
   Queue queue = Queue();
@@ -62,4 +64,6 @@ void main() {
   //queue.display();
   queue.dequeue();
   queue.display();
+
+
 }

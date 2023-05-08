@@ -17,13 +17,11 @@ class MergeSort {
 
   List<int> merge(List<int> left, List<int> right) {
     List<int> sort = [];
-    while (left.isNotEmpty  && right.isNotEmpty) {
+    while (left.isNotEmpty && right.isNotEmpty) {
       if (left[0] < right[0]) {
         sort.add(left.removeAt(0));
-        
       } else {
         sort.add(right.removeAt(0));
-        
       }
     }
     return [...sort, ...left, ...right];
@@ -31,7 +29,7 @@ class MergeSort {
 }
 
 void main(List<String> args) {
-  MergeSort mergeSort = MergeSort();
+  MergeSortPractice mergeSort = MergeSortPractice();
   List<int> array = [30, 2, 14, 22, 41, 5, 7, 10];
   print("UNSORTED ARRAY: $array");
   List<int> sortedArray = mergeSort.mergeSort(array);
@@ -39,29 +37,28 @@ void main(List<String> args) {
   print(sortedArray);
 }
 
-// List<int> mergeArrays(List<int> leftSubArray, List<int> rightSubArray) {
-//   List<int> array = [];
-//   while (leftSubArray.length > 0 && rightSubArray.length > 0) {
-//     if (leftSubArray[0] < rightSubArray[0]) {
-//       array.add(leftSubArray.removeAt(0));
-//     } else {
-//       array.add(rightSubArray.removeAt(0));
-//     }
-//   }
-//   return [...array, ...leftSubArray, ...rightSubArray];
-// }
+class MergeSortPractice {
+  List<int> mergeSort(List<int> array) {
+    if (array.length < 2) {
+      return array;
+    }
+    int mid = array.length ~/ 2;
 
-// List<int> mergeSort(List<int> unsortedArray) {
-//   int middleIndex = (unsortedArray.length / 2).floor();
-//   if (unsortedArray.length < 2) {
-//     return unsortedArray;
-//   }
-//   List<int> leftSubArray = unsortedArray.sublist(0, middleIndex);
-//   return mergeArrays(mergeSort(leftSubArray), mergeSort(unsortedArray.sublist(middleIndex)));
-// }
+    List<int> firstHalf = array.sublist(0, mid);
+    List<int> lastHalf = array.sublist(mid, array.length);
 
-// void main() {
-//   List<int> unsortedArray = [39, 28, 44, 4, 10, 83, 11];
-//   List<int> sortedArray = mergeSort(unsortedArray);
-//   print(sortedArray); // [4, 10, 11, 28, 39, 44, 83]
-// }
+    return join(mergeSort(firstHalf), mergeSort(lastHalf));
+  }
+
+  List<int> join(List<int> firstHalf, List<int> lastHalf) {
+    List<int> sort = [];
+    while (firstHalf.isNotEmpty&&lastHalf.isNotEmpty) {
+  if (firstHalf[0] < lastHalf[0]) {
+    sort.add(firstHalf.removeAt(0));
+  } else {
+    sort.add(lastHalf.removeAt(0));
+  }
+}
+    return [...sort, ...firstHalf, ...lastHalf];
+  }
+}

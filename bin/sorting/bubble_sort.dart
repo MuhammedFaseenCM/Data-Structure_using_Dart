@@ -3,13 +3,13 @@ class BubbleSort {
 
   void bubbleSorting(List<int> array) {
     for (var i = 1; i < array.length; i++) {
-      int element = array[i];
-      int j = i - 1;
-      while (j >= 0 &&  array[j]>element) {
-        array[j + 1] = array[j];
-        j--;
+      for (var j = 0; j < array.length; j++) {
+        if (array[i] < array[j]) {
+          int temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
       }
-      array[j+1] = element;
     }
   }
 }

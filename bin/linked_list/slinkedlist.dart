@@ -1,13 +1,21 @@
+
+class Node {
+  int data;
+  Node? next;
+
+  Node(this.data) {
+    next = null;
+  }
+}
+
 class SinglyLinkedList {
   Node? head;
-  Node? tail;
+
   SinglyLinkedList() {
     head = null;
-    tail = null;
+
   }
 
-  // Node? get head => _head;
-  // Node? get tail => _tail;
   void addNode(int data) {
     Node newNode = Node(data);
 
@@ -99,11 +107,4 @@ class SinglyLinkedList {
   }
 }
 
-class Node {
-  int data;
-  Node? next;
 
-  Node(this.data) {
-    next = null;
-  }
-}
