@@ -14,7 +14,7 @@ class StackWithArray {
 
   void pop() {
     if (array.isEmpty) {
-      print("Array is empty");
+      print("Stack underflow");
       return;
     }
     array[array.length - 2][1] = null;

@@ -1,15 +1,18 @@
+import 'dart:io';
+
 class Stack {
   Node? top;
 
   void display() {
-    if (top == null) {
-      print("Stack is empty");
-      return;
-    }
     Node? temp = top;
 
+    if (temp == null) {
+      print("Stack underflow");
+      return;
+    }
+
     while (temp != null) {
-      print(temp.data);
+      print("${temp.data} ");
 
       temp = temp.next;
     }
@@ -23,29 +26,16 @@ class Stack {
       return;
     }
 
-    Node? temp = top;
-    while (temp!.next != null) {
-      temp = temp.next;
-    }
-
-    temp.next = newnode;
+    newnode.next = top;
+    top = newnode;
   }
 
   void pop() {
     if (top == null) {
-      print("Stack is empty");
+      print("Stack underflow");
       return;
     }
-
-    Node? temp = top;
-    Node? prev = top;
-
-    while (temp!.next != null) {
-      prev = temp;
-      temp = temp.next;
-    }
-
-    prev!.next = null;
+    top = top!.next;
   }
 }
 
@@ -67,6 +57,12 @@ void main() {
   stack.push(6);
   stack.push(7);
   stack.pop();
- 
+  stack.pop();
+  stack.pop();
+  stack.pop();
+  stack.pop();
+  stack.pop();
+  stack.pop();
+
   stack.display();
 }

@@ -7,6 +7,7 @@ class Queue {
 
   void deque() {
     array.removeAt(0);
+    print(array[0]);
   }
 
   int getSize() {
@@ -35,5 +36,8 @@ void main() {
 
   print(queue.array);
   queue.deque();
+  print(queue.array);
+  queue.deque();
+  print(queue.array);
   queue.display();
 }

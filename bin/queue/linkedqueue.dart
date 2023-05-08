@@ -2,20 +2,20 @@ class Node {
   int data;
   Node? next;
   Node(this.data) {
-    
     next = null;
   }
 }
 
 class Queue {
-  Node? top;
+  Node? rear;
+  Node? front;
 
   void display() {
-    if (top == null) {
-      print("Queue is empty");
+    if (front == null) {
+      print(" is empty");
       return;
     }
-    Node? temp = top;
+    Node? temp = front;
 
     while (temp != null) {
       print(temp.data);
@@ -27,29 +27,27 @@ class Queue {
   void enqueue(int data) {
     Node newnode = Node(data);
 
-    if (top == null) {
-      top = newnode;
+    if (rear == null) {
+      rear = front = newnode;
       return;
     }
 
-    Node? temp = top;
-    while (temp!.next != null) {
-      temp = temp.next;
-    }
-
-    temp.next = newnode;
+    rear!.next = newnode;
+    rear = newnode;
   }
 
   void dequeue() {
-    if (top == null) {
+    if (front == null) {
       print("Queue is empty");
       return;
     }
 
-    top = top!.next;
+    front = front!.next;
+    if (front == null) {
+      rear = null;
+    }
   }
 }
-
 
 void main() {
   Queue queue = Queue();
@@ -60,10 +58,17 @@ void main() {
   queue.enqueue(5);
   queue.enqueue(6);
   queue.enqueue(7);
-  // queue.dequeue();
+  queue.display();
+  queue.dequeue();
+  //queue.display();
+  queue.dequeue();
+  queue.dequeue();
+  //queue.display();
+  queue.dequeue();
+  queue.dequeue();
+  //queue.display();
+  queue.dequeue();
   //queue.display();
   queue.dequeue();
   queue.display();
-
-
 }
