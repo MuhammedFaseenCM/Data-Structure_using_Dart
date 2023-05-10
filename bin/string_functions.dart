@@ -18,3 +18,4 @@ class StringClass {
     return AsciiCodec().decode(encryptedStr);
   }
 }
+

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class Stack {
   Node? top;
 
@@ -62,7 +60,8 @@ void main() {
   stack.pop();
   stack.pop();
   stack.pop();
-  stack.pop();
+  //
+  //stack.pop();
 
   stack.display();
 }

@@ -11,11 +11,6 @@ class QuickSort {
     }
 
     swap(array, j + 1, end);
-    if (start == 3) {
-      print("j+1 : ${array[j + 1]}");
-      print("");
-      print(array);
-    }
 
     return (j + 1);
   }
@@ -26,12 +21,9 @@ class QuickSort {
     }
 
     int p = partition(array, start, end);
-    // print(p.toString());
+ 
     quickSort(array, start, p - 1);
     quickSort(array, p + 1, end);
-    if (p + 1 == 1) {
-      print(p + 1);
-    }
   }
 
   void swap(List<int> array, i, j) {
@@ -77,10 +69,35 @@ class QuickSortPractice {
 
       quickSort(array, start, pi - 1);
       quickSort(array, pi + 1, end);
-
     }
+  }
+}
 
+int partition(List<int> array, start, end) {
+  int pivot = array[end];
 
+  int i = start - 1;
 
+  for (var j = start; j <= end - 1; j++) {
+    if (array[j] < pivot) {
+      i++;
+      int temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  }
+
+  int temp = array[i + 1];
+  array[i + 1] = array[end];
+  array[end] = temp;
+
+  return (i + 1);
+}
+
+void quickSort(List<int> array, start, end) {
+  if (start < end) {
+    int pi = partition(array, start, end);
+    quickSort(array, start, pi - 1);
+    quickSort(array, pi + 1, end);
   }
 }

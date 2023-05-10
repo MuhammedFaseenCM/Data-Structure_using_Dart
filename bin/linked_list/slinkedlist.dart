@@ -1,4 +1,3 @@
-
 class Node {
   int data;
   Node? next;
@@ -10,11 +9,6 @@ class Node {
 
 class SinglyLinkedList {
   Node? head;
-
-  SinglyLinkedList() {
-    head = null;
-
-  }
 
   void addNode(int data) {
     Node newNode = Node(data);
@@ -107,4 +101,12 @@ class SinglyLinkedList {
   }
 }
 
+void main(List<String> args) {
+  SinglyLinkedList singlyLinkedList = SinglyLinkedList();
 
+  singlyLinkedList.addNode(2);
+  singlyLinkedList.addBeginning(1);
+  singlyLinkedList.insertIntoAfter(1, 3);
+  singlyLinkedList.addNode(4);
+  singlyLinkedList.displayLinkedList();
+}

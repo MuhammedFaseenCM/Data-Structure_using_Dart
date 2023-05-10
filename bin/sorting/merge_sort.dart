@@ -52,13 +52,37 @@ class MergeSortPractice {
 
   List<int> join(List<int> firstHalf, List<int> lastHalf) {
     List<int> sort = [];
-    while (firstHalf.isNotEmpty&&lastHalf.isNotEmpty) {
-  if (firstHalf[0] < lastHalf[0]) {
-    sort.add(firstHalf.removeAt(0));
-  } else {
-    sort.add(lastHalf.removeAt(0));
-  }
-}
+    while (firstHalf.isNotEmpty && lastHalf.isNotEmpty) {
+      if (firstHalf[0] < lastHalf[0]) {
+        sort.add(firstHalf.removeAt(0));
+      } else {
+        sort.add(lastHalf.removeAt(0));
+      }
+    }
     return [...sort, ...firstHalf, ...lastHalf];
   }
+}
+
+List<int> join(List<int> firstHalf, List<int> secondHalf) {
+  List<int> sort = [];
+  while (firstHalf.isNotEmpty && secondHalf.isNotEmpty) {
+    if (firstHalf[0] < secondHalf[0]) {
+      sort.add(firstHalf.removeAt(0));
+    } else {
+      sort.add(secondHalf.removeAt(0));
+    }
+  }
+  return [...sort, ...firstHalf, ...secondHalf];
+}
+
+List<int> mergeSort(List<int> array) {
+  if (array.length < 2) {
+    return array;
+  }
+  int mid = array.length ~/ 2;
+
+  List<int> firstHalf = array.sublist(0, mid);
+  List<int> secondHalf = array.sublist(mid, array.length);
+
+  return join(mergeSort(firstHalf), mergeSort(secondHalf));
 }

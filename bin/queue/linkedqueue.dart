@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class Node {
   int data;
   Node? next;
@@ -18,7 +20,7 @@ class Queue {
     Node? temp = front;
 
     while (temp != null) {
-      print(temp.data);
+      stdout.write("${temp.data} ");
 
       temp = temp.next;
     }
@@ -59,16 +61,8 @@ void main() {
   queue.enqueue(6);
   queue.enqueue(7);
   queue.display();
+  print("");
   queue.dequeue();
-  //queue.display();
-  queue.dequeue();
-  queue.dequeue();
-  //queue.display();
-  queue.dequeue();
-  queue.dequeue();
-  //queue.display();
-  queue.dequeue();
-  //queue.display();
   queue.dequeue();
   queue.display();
 }
