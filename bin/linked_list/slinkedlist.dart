@@ -102,11 +102,18 @@ class SinglyLinkedList {
 }
 
 void main(List<String> args) {
-  SinglyLinkedList singlyLinkedList = SinglyLinkedList();
+  // SinglyLinkedList singlyLinkedList = SinglyLinkedList();
 
-  singlyLinkedList.addNode(2);
-  singlyLinkedList.addBeginning(1);
-  singlyLinkedList.insertIntoAfter(1, 3);
-  singlyLinkedList.addNode(4);
-  singlyLinkedList.displayLinkedList();
+  // singlyLinkedList.addNode(2);
+  // singlyLinkedList.addBeginning(1);
+  // singlyLinkedList.insertIntoAfter(1, 3);
+  // singlyLinkedList.addNode(4);
+  // singlyLinkedList.displayLinkedList();
+
+  var (lat, long,ing) = getLocation();
+  print(" $lat, $long $ing");
+}
+
+(double x, double y,double z) getLocation() {
+  return (1.2, 3.5,5.6);
 }
