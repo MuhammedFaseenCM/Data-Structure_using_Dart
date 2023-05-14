@@ -1,73 +1,23 @@
 void main(List<String> args) {
   List<int> array = [64, 25, 22, 12, 11];
-  void selectionSort(List<int> array) {
-    for (var i = 0; i < array.length; i++) {
-      int largest = i;
-      for (var j = 0; j < array.length; j++) {
-        if (i == 4) {
-          print("$largest : ${array[largest]}");
-
-        }
-        if (array[largest] < array[j]) {
-          largest = j;
-          print(largest);
-
-          int temp = array[i];
-          array[i] = array[largest];
-          array[j] = temp;
-        }
-      }
-      print(array);
-    }
-  }
-
-  //SelectionSort selectionSortPr = SelectionSort();
-  selectionSort(array);
-  print(array);
-  //insertSort(array);
-  print(array);
-}
-
-class SelectionSort {
-  void sort(List<int> array) {
-    for (var i = 0; i < array.length; i++) {
+  void selectionSort(List array) {
+    for (var i = 0; i < array.length-1; i++) {
       int selected = i;
-      for (var j = 0; j < array.length; j++) {
-        if (array[j] > array[selected]) {
+      for (var j = i+1; j < array.length; j++) {
+        if (array[j] < array[selected]) {
           selected = j;
+
           int temp = array[i];
-          array[i] = array[j];
+          array[i] = array[selected];
           array[selected] = temp;
         }
       }
     }
   }
+
+  print(array);
+  selectionSort(array);
+  print(array);
 }
 
-void selecSort(List<int> array) {
-  for (var i = 0; i < array.length; i++) {
-    int smallest = i;
 
-    for (var j = 0; j < array.length; j++) {
-      if (array[smallest] < array[j]) {
-        smallest = j;
-        int temp = array[i];
-        array[i] = array[smallest];
-        array[j] = temp;
-      }
-    }
-  }
-}
-
-void insertSort(List<int> array) {
-  for (var i = 1; i < array.length; i++) {
-    int element = array[i];
-    int j = i - 1;
-
-    while (j >= 0 && array[j] > element) {
-      array[j + 1] = array[j];
-      j--;
-    }
-    array[j + 1] = element;
-  }
-}
