@@ -1,14 +1,19 @@
 void main(List<String> args) {
-  List<int> array = [22, 30, 41, 2, 5, 7, 10, 14];
+  List<int> array = [64, 25, 22, 12, 11];
   void selectionSort(List<int> array) {
     for (var i = 0; i < array.length; i++) {
-      int smallest = i;
+      int largest = i;
       for (var j = 0; j < array.length; j++) {
-        if (array[smallest] < array[j]) {
-          smallest = j;
+        if (i == 4) {
+          print("$largest : ${array[largest]}");
+
+        }
+        if (array[largest] < array[j]) {
+          largest = j;
+          print(largest);
 
           int temp = array[i];
-          array[i] = array[smallest];
+          array[i] = array[largest];
           array[j] = temp;
         }
       }
@@ -16,10 +21,10 @@ void main(List<String> args) {
     }
   }
 
-  SelectionSort selectionSortPr = SelectionSort();
-  // selectionSort(array);
+  //SelectionSort selectionSortPr = SelectionSort();
+  selectionSort(array);
   print(array);
-  insertSort(array);
+  //insertSort(array);
   print(array);
 }
 
