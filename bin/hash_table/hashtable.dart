@@ -15,17 +15,16 @@ class HashTable {
 
   set(String key, value) {
     int index = hash(key);
-    print("$index : $value");
-    //  table[index] = value;
+
     List? bucket = table[index];
     if (bucket == null) {
       table[index] = [
         [key, value]
       ];
     } else {
-      var sameKeyItem = bucket.where((element) => element[0] == key);
+      dynamic sameKeyItem = bucket.where((element) => element[0] == key);
       if (sameKeyItem.isNotEmpty) {
-        // sameKeyItem[1] = value;
+        sameKeyItem[1] = value;
       } else {
         bucket.add([key, value]);
       }
@@ -34,7 +33,14 @@ class HashTable {
 
   get(key) {
     int index = hash(key);
-    return table[index];
+    List? bucket = table[index];
+    if (bucket != null) {
+      var sameKeyItem = bucket.indexWhere((item) => item[0] == key);
+      if (sameKeyItem != -1) {
+        return bucket[sameKeyItem][1];
+      }
+    }
+    return null;
   }
 
   remove(key) {
@@ -44,10 +50,13 @@ class HashTable {
 
   display() {
     for (var i = 0; i < table.length; i++) {
-      if (table[i] != null) {
-        print("$i : ${table[i]}");
+      // print(table[i].length.toString());
+     
+        if (table[i] != null) {
+          print("index: $i , ${table[i]} ");
+        }
       }
-    }
+    
   }
 }
 
@@ -61,7 +70,9 @@ void main() {
   hashTable.set("banana", 2);
   hashTable.set("orange", 3);
   hashTable.set("lemon", 4);
-  hashTable.set("organisation", "brototype ");
+  hashTable.set("place", "brototype ");
   //hashTable.remove("age");
   hashTable.display();
+  print(hashTable.get("munthiri"));
+
 }

@@ -1,5 +1,3 @@
-
-
 import 'swap.dart';
 
 class QuickSort {
@@ -11,6 +9,7 @@ class QuickSort {
     for (var j = start; j < end; j++) {
       if (array[j] < pivot) {
         i++;
+      
         swap(array, i, j);
       }
     }
@@ -32,10 +31,12 @@ class QuickSort {
 
 void main() {
   QuickSort quickSort = QuickSort();
-  List<int> array = [14, 10, 7, 5, 2, 41, 30, 22];
+  List<int> array = [14, 10, 7, 5, 2];
   print(array);
   quickSort.quickSort(array, 0, array.length - 1);
 
   print(array);
+
+
 }
 
