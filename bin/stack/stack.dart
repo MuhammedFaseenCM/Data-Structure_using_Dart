@@ -60,8 +60,6 @@ void main() {
   stack.pop();
   stack.pop();
   stack.pop();
-  //
-  //stack.pop();
 
   stack.display();
 }

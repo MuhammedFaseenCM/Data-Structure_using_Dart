@@ -52,7 +52,7 @@ class Queue {
 }
 
 void main() {
-  Queue queue = Queue();
+  QueueP queue = QueueP();
   queue.enqueue(1);
   queue.enqueue(2);
   queue.enqueue(3);
@@ -65,4 +65,46 @@ void main() {
   queue.dequeue();
   queue.dequeue();
   queue.display();
+}
+
+class QueueP {
+  Node? front;
+  Node? rear;
+
+  void enqueue(value) {
+    Node newNode = Node(value);
+
+    if (front == null) {
+      front = rear = newNode;
+      return;
+    }
+
+    rear!.next = newNode;
+    rear = newNode;
+  }
+
+  void dequeue() {
+    if (front == null) {
+      print("Queue is empty");
+      return;
+    }
+    front = front!.next;
+
+    if (front == null) {
+      rear = null;
+    }
+  }
+
+  void display() {
+    if (front == null) {
+      print("Queue is empty");
+      return;
+    }
+    Node? temp = front;
+
+    while (temp != null) {
+      print(temp.data);
+      temp = temp.next;
+    }
+  }
 }

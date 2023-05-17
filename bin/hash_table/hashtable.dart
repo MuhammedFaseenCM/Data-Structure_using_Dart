@@ -50,7 +50,18 @@ class HashTable {
 
   remove(key) {
     int index = hash(key);
-    table[index] = null;
+    if (table[index] == null) {
+      print("Value is not available");
+      return;
+    }
+    List bucket = table[index];
+    int sameKeyItem = bucket.indexWhere((item) => item[0] == key);
+   
+    if (sameKeyItem >=0) {
+      bucket.removeAt(sameKeyItem);
+    } else {
+      print("Value not available");
+    }
   }
 
   display() {
@@ -75,7 +86,8 @@ void main() {
   hashTable.set("orange", 3);
   hashTable.set("lemon", 4);
   hashTable.set("place", "brototype ");
-  //hashTable.remove("age");
+  hashTable.remove("name");
+  hashTable.remove("name");
   hashTable.display();
   print(hashTable.get("place"));
 }

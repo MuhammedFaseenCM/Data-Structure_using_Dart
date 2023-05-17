@@ -8,6 +8,7 @@ class StackWithArray {
   void pop() {
     array.removeAt(array.length - 1);
   }
+}
 
   void main(List<String> args) {
     StackWithArray stack = StackWithArray();
@@ -26,4 +27,4 @@ class StackWithArray {
 
     print(stack.array);
   }
-}
+
