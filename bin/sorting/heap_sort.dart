@@ -1,8 +1,8 @@
 void main() {
   List<int> arr = [12, 11, 13, 5, 6, 7];
   print('Original array: $arr');
-
-  heapSort(arr);
+  HeapSort heapSort = HeapSort(arr);
+  heapSort.heapSort(arr);
 
   print('Sorted array: $arr');
 }
@@ -18,46 +18,57 @@ class HeapSort {
   buildHeap(List<int> array) {
     heap = array;
     for (var i = parent(heap.length - 1); i >= 0; i--) {
-      shiftDown(i);
+      heapify(array,array.length,i);
     }
   }
 
-  heapSort() {
-    int length = heap.length;
+  heapSort(List<int> arr) {
+    final int n = arr.length;
 
-    for (var i = length - 1; i >= 0; i--) {
-      buildHeap(heap.sublist(0, length));
-      print(heap);
-      int temp = heap[i];
-      heap[i] = heap[0];
-      heap[0] = temp;
-      length = length - 1;
+    ///
+    // Build heap (rearrange array)
+    for (int i = parent(n - 1); i >= 0; i--) {
+      print(arr);
+      heapify(arr, n, i);
+    }
+    // print("$arr  --------\n");
+
+    // One by one extract an element from heap
+    for (int i = n - 1; i >= 0; i--) {
+      // Move current root to end
+      int temp = arr[0];
+      arr[0] = arr[i];
+      arr[i] = temp;
+
+      // call max heapify on the reduced heap
+      heapify(arr, i, 0);
+      print(arr);
     }
   }
 
-  shiftDown(int currentIndex) {
-    int endIndex = heap.length - 1;
-    int leftIndex = leftChild(currentIndex);
-    while (leftIndex <= endIndex) {
-      int rightIndex = rightChild(currentIndex);
-      int indexToShift;
-      if (rightIndex <= endIndex && heap[rightIndex] > heap[leftIndex]) {
-        indexToShift = rightIndex;
-      } else {
-        indexToShift = leftIndex;
-      }
+  // shiftDown(int currentIndex) {
+  //   int endIndex = heap.length - 1;
+  //   int leftIndex = leftChild(currentIndex);
+  //   while (leftIndex <= endIndex) {
+  //     int rightIndex = rightChild(currentIndex);
+  //     int indexToShift;
+  //     if (rightIndex <= endIndex && heap[rightIndex] > heap[leftIndex]) {
+  //       indexToShift = rightIndex;
+  //     } else {
+  //       indexToShift = leftIndex;
+  //     }
 
-      if (heap[currentIndex] < heap[indexToShift]) {
-        int temp = heap[currentIndex];
-        heap[currentIndex] = heap[indexToShift];
-        heap[indexToShift] = temp;
-        currentIndex = indexToShift;
-        leftIndex = leftChild(currentIndex);
-      } else {
-        return;
-      }
-    }
-  }
+  //     if (heap[currentIndex] < heap[indexToShift]) {
+  //       int temp = heap[currentIndex];
+  //       heap[currentIndex] = heap[indexToShift];
+  //       heap[indexToShift] = temp;
+  //       currentIndex = indexToShift;
+  //       leftIndex = leftChild(currentIndex);
+  //     } else {
+  //       return;
+  //     }
+  //   }
+  // }
 
   parent(int i) {
     return (i - 1) ~/ 2;
@@ -81,29 +92,6 @@ class HeapSort {
 //// 6/2 -1 = 2
 /// heapify(arr,6,2)
 /// heapify(arr,6,1)
-
-void heapSort(List<int> arr) {
-  final int n = arr.length;
-
-  // Build heap (rearrange array)
-  for (int i = n ~/ 2 - 1; i >= 0; i--) {
-    print(arr);
-    heapifyPr(arr, n, i);
-  }
-  print("$arr  --------\n");
-
-  // One by one extract an element from heap
-  for (int i = n - 1; i >= 0; i--) {
-    // Move current root to end
-    int temp = arr[0];
-    arr[0] = arr[i];
-    arr[i] = temp;
-
-    // call max heapify on the reduced heap
-    heapifyPr(arr, i, 0);
-    print(arr);
-  }
-}
 
 ///heapify(arr,6,2)                      heapify(arr,6,1)           heapify(arr,6,0)
 ///largest = 2                             largest =1               largest = 0
@@ -167,6 +155,4 @@ heapifyPr(List<int> arr, int length, int currentIndex) {
     arr[currentIndex] = temp;
     heapifyPr(arr, length, currentIndex);
   }
-
-  
 }

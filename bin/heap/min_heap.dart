@@ -9,11 +9,17 @@ void main() {
   minHeap.display();
   print("--------------");
   minHeap.remove();
+  minHeap.remove();
+  minHeap.remove();
+  minHeap.remove();
+  minHeap.remove();
+  minHeap.remove();
+  minHeap.remove();
   minHeap.display();
 }
 
 class MinHeap {
-  List<int>? heap;
+  late List<int> heap;
 
   MinHeap(this.heap);
 
@@ -23,53 +29,75 @@ class MinHeap {
 
   void buildHeap(List<int> array) {
     heap = array;
-    for (var i = parent(heap!.length - 1); i >= 0; i--) {
-      shiftDown(i);
+    for (var i = parent(heap.length - 1); i >= 0; i--) {
+      heapify(heap, heap.length, i);
     }
   }
 
   insert(int value) {
-    heap!.add(value);
-    shiftUp(heap!.length - 1);
+    heap.add(value);
+    shiftUp(heap.length - 1);
   }
 
   int? peek() {
-    if (heap == null) {
+    if (heap.isEmpty) {
       return null;
     }
-    return heap![0];
+    return heap[0];
   }
 
-  void shiftDown(int currentIndex) {
-    int endIndex = heap!.length - 1;
-    int leftIndex = leftChild(currentIndex);
-    while (leftIndex <= endIndex) {
-      int rightIndex = rightChild(currentIndex);
-      int indexToShift;
-      if (rightIndex <= endIndex && heap![rightIndex] < heap![leftIndex]) {
-        indexToShift = rightIndex;
-      } else {
-        indexToShift = leftIndex;
-      }
+  // void shiftDown(int crntIdx) {
+  //   int endIdx = heap.length - 1;
+  //   int leftIndex = leftChild(crntIdx);
+  //   while (leftIndex <= endIdx) {
+  //     int rightIndex = rightChild(crntIdx);
+  //     int indexToShift;
+  //     if (rightIndex <= endIdx && heap[rightIndex] < heap[leftIndex]) {
+  //       indexToShift = rightIndex;
+  //     } else {
+  //       indexToShift = leftIndex;
+  //     }
 
-      if (heap![currentIndex] > heap![indexToShift]) {
-        int temp = heap![currentIndex];
-        heap![currentIndex] = heap![indexToShift];
-        heap![indexToShift] = temp;
-        currentIndex = indexToShift;
-        leftIndex = leftChild(currentIndex);
-      } else {
-        return;
-      }
+  //     if (heap[crntIdx] > heap[indexToShift]) {
+  //       int temp = heap[crntIdx];
+  //       heap[crntIdx] = heap[indexToShift];
+  //       heap[indexToShift] = temp;
+  //       crntIdx = indexToShift;
+  //       leftIndex = leftChild(crntIdx);
+  //     } else {
+  //       return;
+  //     }
+  //   }
+  // }
+
+    heapify(List<int> arr, int length, int currentIdx) {
+    int smallest = currentIdx;
+    int leftIdx = (2 * currentIdx) + 1;
+    int rightIdx = (2 * currentIdx) + 2;
+
+    if (leftIdx < length && arr[leftIdx] < arr[currentIdx]) {
+      smallest = leftIdx;
+    }
+
+    if (rightIdx < length && arr[rightIdx] < arr[currentIdx]) {
+      smallest = rightIdx;
+    }
+
+    if (smallest != currentIdx) {
+      int temp = arr[currentIdx];
+      arr[currentIdx] = arr[smallest];
+      arr[smallest] = temp;
+
+      heapify(arr, length, currentIdx);
     }
   }
 
   shiftUp(int currentIndex) {
     int parentIndex = parent(currentIndex);
-    while (currentIndex > 0 && heap![parentIndex] > heap![currentIndex]) {
-      int temp = heap![currentIndex];
-      heap![currentIndex] = heap![parentIndex];
-      heap![parentIndex] = temp;
+    while (currentIndex > 0 && heap[parentIndex] > heap[currentIndex]) {
+      int temp = heap[currentIndex];
+      heap[currentIndex] = heap[parentIndex];
+      heap[parentIndex] = temp;
       currentIndex = parentIndex;
       parentIndex = parent(currentIndex);
     }
@@ -88,22 +116,26 @@ class MinHeap {
   }
 
   void remove() {
-    int temp = heap![0];
-    heap![0] = heap![heap!.length - 1];
-    heap![heap!.length - 1] = temp;
-    print("\n\n ${heap![heap!.length - 1]} **\n\n");
-    heap!.removeAt(heap!.length - 1);
-    print(heap);
-    shiftDown(0);
+    if (heap.isEmpty) {
+      print("Heap is empty");
+      return;
+    }
+    int temp = heap[0];
+    heap[0] = heap[heap.length - 1];
+    heap[heap.length - 1] = temp;
+
+    heap.removeAt(heap.length - 1);
+
+    heapify(heap, heap.length, 0);
   }
 
   display() {
-    if (heap == null) {
+    if (heap.isEmpty) {
       print("Empty array");
       return;
     }
-    for (var i = 0; i < heap!.length; i++) {
-      print(heap![i]);
+    for (var i = 0; i < heap.length; i++) {
+      print(heap[i]);
     }
   }
 }

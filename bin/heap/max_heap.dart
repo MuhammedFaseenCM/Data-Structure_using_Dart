@@ -1,15 +1,14 @@
 import '../sorting/heap_sort.dart';
 
 void main() {
-  MaxHeap maxHeap = MaxHeap.heapify([6, 2, 8,20]);
+  MaxHeap maxHeap = MaxHeap.heapify([6, 8, 2]);
 
   maxHeap.display();
   print("--------------");
   maxHeap.insert(1);
   maxHeap.insert(5);
   maxHeap.insert(15);
-  maxHeap.insert(7);
-  maxHeap.insert(20);
+  maxHeap.remove();
   maxHeap.display();
 }
 
@@ -44,30 +43,39 @@ class MaxHeap {
       parentIndex = parent(currentIndex);
     }
   }
-
-  void shiftDown(int currentIndex) {
-    int endIndex = heap.length - 1;
-    int leftIndex = leftChild(currentIndex);
-    while (leftIndex <= endIndex) {
-      int rightIndex = rightChild(currentIndex);
-      int indexToShift;
-      if (rightIndex <= endIndex && heap[rightIndex] > heap[leftIndex]) {
-        indexToShift = rightIndex;
-      } else {
-        indexToShift = leftIndex;
-      }
-
-      if (heap[currentIndex] < heap[indexToShift]) {
-        int temp = heap[currentIndex];
-        heap[currentIndex] = heap[indexToShift];
-        heap[indexToShift] = temp;
-        currentIndex = indexToShift;
-        leftIndex = leftChild(currentIndex);
-      } else {
-        return;
-      }
-    }
+  remove() {
+    int temp = heap[0];
+    heap[0] = heap[heap.length - 1];
+    heap[heap.length - 1] = temp;
+    print("\n\n ${heap[heap.length - 1]} **\n\n");
+    heap.removeAt(heap.length - 1);
+    print(heap);
+    heapify(heap, heap.length,0);
   }
+
+  // void shiftDown(int currentIndex) {
+  //   int endIndex = heap.length - 1;
+  //   int leftIndex = leftChild(currentIndex);
+  //   while (leftIndex <= endIndex) {
+  //     int rightIndex = rightChild(currentIndex);
+  //     int indexToShift;
+  //     if (rightIndex <= endIndex && heap[rightIndex] > heap[leftIndex]) {
+  //       indexToShift = rightIndex;
+  //     } else {
+  //       indexToShift = leftIndex;
+  //     }
+
+  //     if (heap[currentIndex] < heap[indexToShift]) {
+  //       int temp = heap[currentIndex];
+  //       heap[currentIndex] = heap[indexToShift];
+  //       heap[indexToShift] = temp;
+  //       currentIndex = indexToShift;
+  //       leftIndex = leftChild(currentIndex);
+  //     } else {
+  //       return;
+  //     }
+  //   }
+  // }
 
   int parent(int i) {
     return (i - 1) ~/ 2;
